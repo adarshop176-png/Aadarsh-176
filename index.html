@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>सुख समृद्धि विज्ञान - Learning App</title>
+    <style>
+        :root {
+            --bg-dark: #0f1015;
+            --card-bg: #1a1c24;
+            --card-border: #2a2d3d;
+            --pw-primary: #5a4bda;
+            --pw-accent: #7c6cf6;
+            --gold-accent: #ffb703;
+            --text-white: #ffffff;
+            --text-gray: #9e9ea7;
+            --whatsapp-green: #25d366;
+            --gmail-red: #ea4335;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            padding-bottom: 90px;
+        }
+
+        header {
+            background: #14151c;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            background: linear-gradient(135deg, var(--pw-primary), var(--pw-accent));
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .brand-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #282461, #131230);
+            border: 1px solid var(--pw-primary);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(90, 75, 218, 0.15);
+        }
+
+        .welcome-banner h2 { font-size: 1.3rem; color: #fff; margin-bottom: 6px; }
+        .welcome-banner p { font-size: 0.9rem; color: #c0c0d0; margin-bottom: 14px; }
+
+        .paid-banner {
+            background: linear-gradient(90deg, #382000, #1f1400);
+            border: 1px solid var(--gold-accent);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .paid-banner-text h3 { color: var(--gold-accent); font-size: 1rem; margin-bottom: 4px; }
+        .paid-banner-text p { color: #d1d1d1; font-size: 0.8rem; }
+
+        .btn-join-paid {
+            background: var(--gold-accent);
+            color: #000;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: 20px 0 12px 0;
+            color: #fff;
+        }
+
+        .grid-4-large {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .card-large {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 115px;
+            text-decoration: none;
+        }
+
+        .card-large:active {
+            transform: scale(0.97);
+            border-color: var(--pw-accent);
+            background: #222533;
+        }
+
+        .card-large .card-icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .card-large h3 { font-size: 0.95rem; color: #fff; margin-bottom: 4px; }
+        .card-large p { font-size: 0.78rem; color: var(--text-gray); }
+
+        .grid-2-small {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .card-small {
+            border-radius: 12px;
+            padding: 14px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+        }
+
+        .btn-whatsapp { background: var(--whatsapp-green); }
+        .btn-gmail { background: var(--gmail-red); }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .chapter-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        .chapter-num {
+            background: rgba(124, 108, 246, 0.15);
+            color: var(--pw-accent);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .chapter-title { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
+        .chapter-desc { font-size: 0.85rem; color: var(--text-gray); margin-bottom: 12px; line-height: 1.4; }
+
+        .btn-action {
+            background: var(--pw-primary);
+            color: #fff;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .info-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .info-box h4 { color: var(--pw-accent); font-size: 1rem; margin-bottom: 8px; }
+        .info-box p { font-size: 0.85rem; color: var(--text-gray); }
+
+        .input-field {
+            width: 100%;
+            background: #101117;
+            color: #fff;
+            border: 1px solid var(--card-border);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: #12131a;
+            border-top: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            color: var(--text-gray);
+            font-size: 0.75rem;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .nav-item.active { color: var(--pw-accent); font-weight: bold; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-body {
+            background: var(--card-bg);
+            border: 1px solid var(--pw-accent);
+            border-radius: 16px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        .close-btn {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-logo">
+            <div class="brand-icon">सु</div>
+            <div>
+                <div class="brand-title">सुख समृद्धि विज्ञान</div>
+                <div style="font-size: 0.7rem; color: var(--text-gray);">ज्ञान एवं विज्ञान लर्निंग हब</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- TAB 1: HOME -->
+        <div id="home" class="tab-content active">
+            <div class="welcome-banner">
+                <h2>नमस्ते साधक! 🙏</h2>
+                <p>ज्ञान, विज्ञान एवं साधना की यात्रा में आपका स्वागत है।</p>
+                <button class="btn-action" style="width: auto; padding: 8px 18px;" onclick="switchTab('courses')">अध्याय पढ़ना शुरू करें →</button>
+            </div>
+
+            <div class="paid-banner">
+                <div class="paid-banner-text">
+                    <h3>👑 1-on-1 Paid Conversation</h3>
+                    <p>व्यक्तिगत मार्गदर्शन व शंका समाधान के लिए जुड़ें</p>
+                </div>
+                <a href="https://wa.me/919208774581?text=Namaste!%20Mujhe%20Paid%20Conversation%20join%20karna%20hai." target="_blank" class="btn-join-paid">Join Now</a>
+            </div>
+
+            <div class="section-title">⚡ मुख्य डैशबोर्ड (Main Features)</div>
+
+            <div class="grid-4-large">
+                <div class="card-large" onclick="switchTab('courses')">
+                    <div class="card-icon">📚</div>
+                    <div>
+                        <h3>25 ज्ञान कोर्सेस</h3>
+                        <p>संपूर्ण अध्याय एवं अध्ययन सामग्री</p>
+                    </div>
+                </div>
+                <div class="card-large" onclick="switchTab('lab')">
+                    <div class="card-icon">🧪</div>
+                    <div>
+                        <h3>Alchemy Lab</h3>
+                        <p>वर्चुअल सिमुलेशन व प्रयोग</p>
+                    </div>
+                </div>
+                
+                <a class="card-large" href="https://youtube.com/channel/UC8O1-F25SQkj_yVV_QvldKA?si=urU6tuZ1pq3aQBUM" target="_blank">
+                    <div class="card-icon">🎥</div>
+                    <div>
+                        <h3>YouTube चैनल</h3>
+                        <p>ऑफिशल चैनल डायरेक्ट खोलें</p>
+                    </div>
+                </a>
+
+                <div class="card-large" onclick="switchTab('notes')">
+                    <div class="card-icon">📝</div>
+                    <div>
+                        <h3>स्टडी नोट्स</h3>
+                        <p>अपनी पर्सनल डायरी व नोट्स</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">💬 डायरेक्ट संपर्क एवं सपोर्ट</div>
+
+            <div class="grid-2-small">
+                <a href="https://wa.me/919208774581?text=Namaste!%20Mujhe%20jaankari%20chahiye." target="_blank" class="card-small btn-whatsapp">
+                    WhatsApp Chat
+                </a>
+                <a href="mailto:sushilsharma1832@gmail.com" class="card-small btn-gmail">
+                    Email Support
+                </a>
+            </div>
+
+            <div class="info-box">
+                <h4>संस्था परिचय (About Us)</h4>
+                <p><strong>सुख समृद्धि विज्ञान अनुसंधान केंद्र</strong> का मुख्य उद्देश्य साधकों को सही ज्ञान, तर्क, विज्ञान और आध्यात्मिक रूपांतरण की ओर ले जाना है।</p>
+            </div>
+        </div>
+
+        <!-- TAB 2: COURSES -->
+        <div id="courses" class="tab-content">
+            <div class="section-title">📖 सभी 25 अध्याय (Chapters List)</div>
+            <div class="chapters-grid" id="chaptersGrid"></div>
+        </div>
+
+        <!-- TAB 3: LAB -->
+        <div id="lab" class="tab-content">
+            <div class="section-title">🧪 Alchemy Lab Simulation</div>
+            <div class="info-box">
+                <h4>वर्चुअल रसायन प्रयोगशाला</h4>
+                <p>पारद एवं विभिन्न तत्वों के ऊर्जा संतुलन का परीक्षण करें:</p>
+                <br>
+                <button class="btn-action" onclick="runSimulation()">प्रयोग शुरू करें</button>
+                <div id="labResult" style="margin-top: 15px; color: var(--gold-accent); font-weight: bold;"></div>
+            </div>
+        </div>
+
+        <!-- TAB 4: NOTES -->
+        <div id="notes" class="tab-content">
+            <div class="section-title">📝 अध्ययन नोट्स व डायरी</div>
+            <div class="info-box">
+                <h4>अपने महत्वपूर्ण बिंदु लिखें:</h4>
+                <textarea id="userNotes" class="input-field" style="height: 160px; resize: vertical;" placeholder="यहाँ अपने विचार और नोट्स दर्ज करें..."></textarea>
+                <button class="btn-action" onclick="saveNotes()">नोट्स सेव करें 💾</button>
+                <div id="notesStatus" style="margin-top: 10px; font-size: 0.85rem; color: var(--gold-accent);"></div>
+            </div>
+        </div>
+
+        <!-- TAB 5: PROFILE -->
+        <div id="profile" class="tab-content">
+            <div class="section-title">👤 मेरी प्रोफाइल</div>
+            <div class="info-box">
+                <h4>अपनी जानकारी दर्ज करें:</h4>
+                
+                <label style="font-size: 0.8rem; color: var(--text-gray);">पूरा नाम:</label>
+                <input type="text" id="profName" class="input-field" placeholder="अपना नाम लिखें...">
+
+                <label style="font-size: 0.8rem; color: var(--text-gray);">मोबाइल नंबर:</label>
+                <input type="tel" id="profPhone" class="input-field" placeholder="मोबाइल नंबर...">
+
+                <label style="font-size: 0.8rem; color: var(--text-gray);">ईमेल आईडी:</label>
+                <input type="email" id="profEmail" class="input-field" placeholder="ईमेल आईडी...">
+
+                <button class="btn-action" onclick="saveProfile()">प्रोफाइल सेव करें 💾</button>
+                <div id="profileStatus" style="margin-top: 10px; font-size: 0.85rem; color: var(--gold-accent);"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Chapter Modal -->
+    <div id="chapterModal" class="modal">
+        <div class="modal-body">
+            <button class="close-btn" onclick="closeModal()">बंद करें ✖</button>
+            <h3 id="modalTitle" style="color: var(--pw-accent); margin-bottom: 12px; font-size: 1.1rem;"></h3>
+            <div id="modalContent" style="line-height: 1.6; font-size: 0.92rem; color: #d0d0e0; white-space: pre-line;"></div>
+        </div>
+    </div>
+
+    <!-- Bottom Nav Bar -->
+    <div class="bottom-nav">
+        <div class="nav-item active" id="nav-home" onclick="switchTab('home')">
+            <div>🏠</div>
+            <div>Home</div>
+        </div>
+        <div class="nav-item" id="nav-courses" onclick="switchTab('courses')">
+            <div>📚</div>
+            <div>Courses</div>
+        </div>
+        <div class="nav-item" id="nav-lab" onclick="switchTab('lab')">
+            <div>🧪</div>
+            <div>Lab</div>
+        </div>
+        <div class="nav-item" id="nav-notes" onclick="switchTab('notes')">
+            <div>📝</div>
+            <div>Notes</div>
+        </div>
+        <div class="nav-item" id="nav-profile" onclick="switchTab('profile')">
+            <div>👤</div>
+            <div>Profile</div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            var tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+
+            var targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+
+            var navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(function(item) {
+                item.classList.remove('active');
+            });
+
+            var activeNav = document.getElementById('nav-' + tabId);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        function runSimulation() {
+            var labResult = document.getElementById('labResult');
+            labResult.innerText = "सिमुलेशन प्रगति पर है...";
+            setTimeout(function() {
+                labResult.innerText = "✨ प्रयोग सफल: ऊर्जा संतुलन 100% प्राप्त हुआ!";
+            }, 1000);
+        }
+
+        function closeModal() {
+            document.getElementById('chapterModal').style.display = 'none';
+        }
+
+        function saveNotes() {
+            var notes = document.getElementById('userNotes').value;
+            localStorage.setItem('saved_user_notes', notes);
+            document.getElementById('notesStatus').innerText = "✅ नोट्स सफलतापूर्वक सेव हो गए हैं!";
+            setTimeout(() => { document.getElementById('notesStatus').innerText = ""; }, 3000);
+        }
+
+        function saveProfile() {
+            var name = document.getElementById('profName').value;
+            var phone = document.getElementById('profPhone').value;
+            var email = document.getElementById('profEmail').value;
+
+            localStorage.setItem('prof_name', name);
+            localStorage.setItem('prof_phone', phone);
+            localStorage.setItem('prof_email', email);
+
+            document.getElementById('profileStatus').innerText = "✅ प्रोफाइल जानकारी सेव हो गई है!";
+            setTimeout(() => { document.getElementById('profileStatus').innerText = ""; }, 3000);
+        }
+
+        var chaptersData = [
+            {
+                num: 1,
+                title: "अल्केमी (रसविद्या) का परिचय एवं इतिहास",
+                desc: "अल्केमी केवल धातुओं को सोने में बदलने की कला नहीं, बल्कि व्यापक विज्ञान और भौतिक व आध्यात्मिक रूपांतरण है।",
+                full: "अल्केमी, जिसे भारतीय परंपरा में रसविद्या कहा जाता है, केवल धातुओं को सोने में बदलने की कला नहीं है, बल्कि यह एक व्यापक विज्ञान और दर्शन है जो भौतिक, मानसिक और आध्यात्मिक रूपांतरण को समझाता है। प्राचीन काल में यह ज्ञान गुप्त रखा जाता था और केवल योग्य साधकों को ही दिया जाता था। भारत, चीन, मिस्र और यूनान में इसकी अलग-अलग परंपराएँ विकसित हुईं, लेकिन सभी का मूल उद्देश्य “परिवर्तन” (Transformation) था।\n\nभारत में नागार्जुन को रसशास्त्र का प्रमुख आचार्य माना जाता है। उन्होंने पारद (Mercury) और अन्य धातुओं के प्रयोग से औषधियाँ बनाने और शरीर को स्वस्थ एवं दीर्घायु बनाने के अनेक प्रयोग किए। रसशास्त्र का आयुर्वेद से गहरा संबंध है, जहाँ धातुओं और खनिजों को शुद्ध करके औषधि के रूप में उपयोग किया जाता है।\n\nपश्चिमी अल्केमी में “Philosopher’s Stone” का उल्लेख मिलता है, जिसे ऐसी वस्तु माना जाता था जो किसी भी धातु को सोने में बदल सकती है और अमरत्व प्रदान कर सकती है। यह केवल भौतिक नहीं, बल्कि आंतरिक परिवर्तन का प्रतीक भी है—अज्ञान से ज्ञान की यात्रा।\n\nइस प्रकार, अल्केमी का वास्तविक अर्थ है—स्वयं का रूपांतरण। यह हमें सिखाता है कि जैसे धातुओं को शुद्ध किया जा सकता है, वैसे ही मन और विचारों को भी शुद्ध किया जा सकता है।"
+            },
+               {
+                num: 2,
+                title: "पारद (Mercury) के गुण और संस्कार",
+                desc: "रसशास्त्र में पारद को रसराज कहा जाता है। इसके अष्ट संस्कार और आयुर्वेद में उपयोग की विस्तृत जानकारी।",
+                full: "रसशास्त्र में पारद को “रसराज” कहा जाता है, अर्थात सभी धातुओं का राजा। यह एकमात्र धातु है जो सामान्य तापमान पर तरल अवस्था में रहती है। प्राचीन आचार्यों ने पारद को अत्यंत शक्तिशाली और दिव्य तत्व माना है।\n\nपारद का उपयोग करने से पहले उसे शुद्ध करना आवश्यक होता है। इसके लिए “अष्ट संस्कार” बताए गए हैं—स्वेदन, मर्दन, मूर्छन, उत्थापन, पातन आदि। इन प्रक्रियाओं के माध्यम से पारद की अशुद्धियाँ दूर की जाती हैं और उसकी शक्ति को बढ़ाया जाता है।\n\nआयुर्वेद में पारद भस्म का उपयोग रोगों के उपचार में किया जाता है। यह शरीर की रोग-प्रतिरोधक क्षमता को बढ़ाने, पाचन सुधारने और ऊर्जा स्तर बढ़ाने में सहायक माना जाता है। हालांकि आधुनिक विज्ञान के अनुसार बिना शुद्ध किए पारद का उपयोग हानिकारक हो सकता है, इसलिए इसके प्रयोग में सावधानी आवश्यक है।\n\nपारद केवल एक रासायनिक तत्व नहीं है, बल्कि यह “चेतना” का प्रतीक भी माना जाता है—जो निरंतर गतिशील है और परिवर्तनशील है।"
+            },
+            {
+                num: 3,
+                title: "Magnum Opus (The Great Work)",
+                desc: "अल्केमी की चार मुख्य अवस्थाएँ: Nigredo, Albedo, Citrinitas और Rubedo की विस्तृत व्याख्या।",
+                full: "Magnum Opus का अर्थ है “महान कार्य”। यह अल्केमी की वह प्रक्रिया है जिसमें साधक अपने भीतर और बाहर दोनों स्तरों पर परिवर्तन करता है। इसे चार चरणों में विभाजित किया गया है:\n\n1. Nigredo (अंधकार) – यह पहला चरण है जिसमें अज्ञान, भ्रम और नकारात्मकता को पहचानकर उसे समाप्त किया जाता है।\n2. Albedo (श्वेतता) – इस चरण में शुद्धता और स्पष्टता आती है। मन शांत होता है और विचार स्पष्ट होते हैं।\n3. Citrinitas (पीत अवस्था) – यह ज्ञान और जागरूकता का चरण है, जहाँ साधक को सत्य की अनुभूति होती है।\n4. Rubedo (लाल अवस्था) – यह अंतिम चरण है, जिसमें पूर्णता और सफलता प्राप्त होती है।\n\nयह प्रक्रिया केवल रसायन तक सीमित नहीं है, बल्कि यह जीवन के हर क्षेत्र में लागू होती है—जैसे शिक्षा, करियर और आत्म-विकास।"
+            },
+            {
+                num: 4,
+                title: "ऊर्जा और पदार्थ का रूपांतरण",
+                desc: "E=mc² सिद्धांत और प्राचीन रसविद्या के अनुसार स्थूल, सूक्ष्म और कारण ऊर्जा स्तरों का अध्ययन।",
+                full: "आधुनिक विज्ञान के अनुसार, पदार्थ (Matter) वास्तव में ऊर्जा का ही एक रूप है। आइंस्टीन का सिद्धांत E=mc² बताता है कि ऊर्जा और पदार्थ एक-दूसरे में परिवर्तित हो सकते हैं।\n\nप्राचीन रसविद्या भी यही कहती है कि ब्रह्मांड की हर वस्तु ऊर्जा से बनी है। विचार, भावनाएँ और चेतना भी ऊर्जा के रूप हैं। जब हम अपने विचारों को बदलते हैं, तो हम अपने जीवन की परिस्थितियों को भी बदल सकते हैं।\n\nऊर्जा के विभिन्न स्तर होते हैं—स्थूल (Physical), सूक्ष्म (Subtle) और कारण (Causal)। साधना और ध्यान के माध्यम से व्यक्ति सूक्ष्म ऊर्जा को नियंत्रित करना सीख सकता है।\n\nइस प्रकार, ऊर्जा और पदार्थ का रूपांतरण केवल वैज्ञानिक सिद्धांत नहीं है, बल्कि यह जीवन को बेहतर बनाने का एक व्यावहारिक तरीका भी है।"
+            },
+            {
+                num: 5,
+                title: "प्राचीन रासायनिक तकनीकें",
+                desc: "पातन, ऊर्ध्वपातन और भस्मीकरण जैसी प्राचीन शोधन विधियों और यंत्रों का विस्तृत विवरण।",
+                full: "प्राचीन काल में वैज्ञानिक उपकरण आधुनिक मशीनों जितने उन्नत नहीं थे, फिर भी आचार्यों ने अद्भुत तकनीकें विकसित की थीं। इनमें प्रमुख हैं:\n\n- पातन (Distillation) – किसी पदार्थ को गर्म करके उसके वाष्प को अलग करना।\n- ऊर्ध्वपातन (Sublimation) – ठोस को सीधे गैस में बदलना।\n- भस्मीकरण (Calcination) – पदार्थ को जलाकर उसकी अशुद्धियाँ दूर करना।\n\nइन प्रक्रियाओं के लिए विशेष यंत्रों का उपयोग किया जाता था जैसे डमरू यंत्र, बालुका यंत्र आदि।\n\nइन तकनीकों का उपयोग औषधि निर्माण, धातु शोधन और रसायन प्रयोगों में किया जाता था। आज भी आधुनिक रसायन विज्ञान में इन प्रक्रियाओं का उपयोग किया जाता है।"
+            },
+            {
+                num: 6,
+                title: "रसायन शास्त्र और आध्यात्मिक संबंध",
+                desc: "बाहरी रासायनिक प्रक्रियाओं और आंतरिक मानसिक व चेतना रूपांतरण का गहरा संबंध।",
+                full: "रसायन शास्त्र केवल पदार्थों के परिवर्तन का विज्ञान नहीं है, बल्कि यह मानव चेतना के विकास से भी जुड़ा हुआ है। प्राचीन आचार्यों का मानना था कि बाहरी रासायनिक प्रक्रियाएँ और आंतरिक आध्यात्मिक प्रक्रियाएँ एक-दूसरे से संबंधित हैं। जब कोई साधक धातुओं का शोधन करता है, तो वह अपने मन और विचारों का भी शोधन करता है।\n\nआध्यात्मिक दृष्टिकोण से, शरीर को एक प्रयोगशाला माना जाता है और चेतना को मुख्य ऊर्जा स्रोत। ध्यान, प्राणायाम और साधना के माध्यम से व्यक्ति अपनी आंतरिक ऊर्जा को नियंत्रित कर सकता है। यह प्रक्रिया कुंडलिनी जागरण से भी जुड़ी मानी जाती है, जहाँ ऊर्जा धीरे-धीरे ऊपर की ओर बढ़ती है और व्यक्ति को उच्च चेतना की अवस्था तक ले जाती है।\n\nइस प्रकार, रसायन और अध्यात्म का संयोजन जीवन को संतुलित और सार्थक बनाने में सहायक होता है।"
+            },
+            {
+                num: 7,
+                title: "धातु शोधन प्रक्रियाएं",
+                desc: "कच्ची धातुओं की अशुद्धियों को दूर करने की पारंपरिक तपाने और औषधीय द्रवों में डुबाने की विधियाँ।",
+                full: "धातुओं का शोधन प्राचीन रसायन शास्त्र का एक महत्वपूर्ण भाग है। कच्ची धातुओं में अनेक प्रकार की अशुद्धियाँ होती हैं, जिन्हें दूर करना आवश्यक होता है। इसके लिए विभिन्न प्रक्रियाएँ अपनाई जाती हैं जैसे तपाना, ठंडा करना, औषधीय द्रवों में डुबाना आदि।\n\nशोधन के दौरान धातु की संरचना में परिवर्तन होता है, जिससे उसकी गुणवत्ता और उपयोगिता बढ़ जाती है। उदाहरण के लिए, सोने और चांदी को विशेष प्रक्रियाओं से शुद्ध किया जाता है ताकि वे औषधीय उपयोग के योग्य बन सकें।\n\nयह प्रक्रिया हमें यह भी सिखाती है कि जैसे धातुओं को शुद्ध किया जा सकता है, वैसे ही मनुष्य अपने दोषों को दूर करके स्वयं को बेहतर बना सकता है।"
+            },
+            {
+                num: 8,
+                title: "जड़ी-बूटियों का चमत्कारिक प्रयोग",
+                desc: "रसायन शोधन और औषधि निर्माण में विशेष वनस्पतियों के प्राकृतिक गुणों का प्रयोग।",
+                full: "प्राचीन काल में जड़ी-बूटियों का उपयोग रसायन और चिकित्सा दोनों में किया जाता था। कुछ विशेष वनस्पतियाँ ऐसी मानी जाती थीं जिनमें अद्भुत गुण होते हैं। इनका उपयोग धातुओं के शोधन और औषधि निर्माण में किया जाता था।\n\nजड़ी-बूटियाँ प्राकृतिक स्रोत हैं और इनमें विभिन्न प्रकार के रासायनिक तत्व पाए जाते हैं। इनका सही उपयोग शरीर को स्वस्थ रखने और रोगों से बचाने में सहायक होता है।\n\nइसके साथ ही, कुछ जड़ी-बूटियों को ऊर्जा संतुलन के लिए भी उपयोग किया जाता था, जिससे मानसिक और शारीरिक संतुलन बना रहता है।"
+            },
+            {
+                num: 9,
+                title: "सूक्ष्म समृद्धि के नियम",
+                desc: "मानसिक और आंतरिक समृद्धि, विचारों की शक्ति और सकारात्मक ऊर्जा के नियम।",
+                full: "सूक्ष्म समृद्धि का अर्थ है मानसिक और आंतरिक समृद्धि। यह केवल धन तक सीमित नहीं है, बल्कि इसमें शांति, संतुलन और संतोष भी शामिल हैं।\n\nविचारों की शक्ति बहुत महत्वपूर्ण होती है। सकारात्मक विचार व्यक्ति के जीवन में सकारात्मक परिणाम लाते हैं। इसी प्रकार, नकारात्मक विचार जीवन में समस्याएँ उत्पन्न कर सकते हैं।\n\nइस अध्याय में यह समझाया जाता है कि कैसे व्यक्ति अपने विचारों को नियंत्रित करके अपने जीवन को बेहतर बना सकता है।"
+            },
+            {
+                num: 10,
+                title: "मानसिक रूपांतरण एवं ध्यान",
+                desc: "ध्यान (Meditation) द्वारा विचारों में सुधार, तनाव मुक्ति और मानसिक स्पष्टता प्राप्त करना।",
+                full: "मानसिक रूपांतरण का अर्थ है अपने विचारों और दृष्टिकोण को बदलना। ध्यान (Meditation) इसके लिए एक प्रभावी तरीका है। ध्यान के माध्यम से मन को शांत किया जा सकता है और एकाग्रता बढ़ाई जा सकती है।\n\nनियमित ध्यान करने से तनाव कम होता है और मानसिक स्पष्टता बढ़ती है। यह व्यक्ति को अपने लक्ष्यों को प्राप्त करने में भी मदद करता है।"
+            },
+            {
+                num: 11,
+                title: "आधुनिक विज्ञान और प्राचीन रसायन",
+                desc: "वैज्ञानिक सिद्धांतों और प्राचीन रसशास्त्र के अनुभवों का तुलनात्मक और संतुलित दृष्टिकोण।",
+                full: "प्राचीन रसायन शास्त्र और आधुनिक विज्ञान में कई समानताएँ हैं। आज के वैज्ञानिक सिद्धांत जैसे ऊर्जा, परमाणु संरचना आदि प्राचीन ज्ञान से मिलते-जुलते हैं।\n\nहालांकि, आधुनिक विज्ञान प्रयोग और प्रमाण पर आधारित है, जबकि प्राचीन विज्ञान अनुभव और परंपरा पर आधारित था। दोनों का संतुलित उपयोग ज्ञान को और अधिक समृद्ध बना सकता है।"
+            },
+            {
+                num: 12,
+                title: "रसराज पारद की महत्ता",
+                desc: "शरीर की ऊर्जा संतुलन और प्रतिरोधक क्षमता बढ़ाने में पारद का विशेष महत्व।",
+                full: "पारद को रसायन शास्त्र में विशेष स्थान दिया गया है। इसे विभिन्न प्रक्रियाओं से शुद्ध करके औषधि के रूप में उपयोग किया जाता है।\n\nयह शरीर की ऊर्जा को संतुलित करने और रोगों से लड़ने की क्षमता बढ़ाने में सहायक माना जाता है।"
+            },
+            {
+                num: 13,
+                title: "काय कल्प और स्वास्थ्य सुरक्षा",
+                desc: "शरीर का पुनर्जीवन, प्राकृतिक आहार और दीर्घायु जीवनशैली के प्राचीन नियम।",
+                full: "कायाकल्प का अर्थ है शरीर का पुनर्निर्माण या पुनर्जीवन। प्राचीन चिकित्सा पद्धतियों में इसे बहुत महत्व दिया गया है।\n\nइसमें प्राकृतिक औषधियों, आहार और जीवनशैली के माध्यम से शरीर को स्वस्थ और मजबूत बनाया जाता है।"
+            },
+            {
+                num: 14,
+                title: "मंत्र और तरंग ऊर्जा",
+                desc: "ध्वनि तरंगों का प्रभाव, मंत्र उच्चारण और मानसिक एकाग्रता का विज्ञान।",
+                full: "ध्वनि और तरंगों का शरीर और मन पर प्रभाव पड़ता है। मंत्रों का उच्चारण विशेष प्रकार की ध्वनि तरंगें उत्पन्न करता है, जो मानसिक शांति और एकाग्रता में सहायक होती हैं।\n\nहालांकि, इसे वैज्ञानिक रूप से सीमित रूप में ही समझा गया है, इसलिए इसे संतुलित दृष्टिकोण से देखना चाहिए।"
+            },
+            {
+                num: 15,
+                title: "तत्वों का संतुलन (पंचमहाभूत)",
+                desc: "पृथ्वी, जल, अग्नि, वायु और आकाश तत्वों का शरीर में संतुलन और महत्व।",
+                full: "प्राचीन भारतीय दर्शन के अनुसार, शरीर पांच तत्वों से बना है—पृथ्वी, जल, अग्नि, वायु और आकाश। इन तत्वों का संतुलन स्वास्थ्य के लिए आवश्यक है।"
+            },
+            {
+                num: 16,
+                title: "ऊर्जा केंद्र (चक्र प्रणाली)",
+                desc: "मानव शरीर के मुख्य ऊर्जा चक्र और उनका शारीरिक व मानसिक संतुलन में योग।",
+                full: "शरीर में ऊर्जा केंद्र होते हैं जिन्हें चक्र कहा जाता है। ये शरीर और मन के संतुलन में महत्वपूर्ण भूमिका निभाते हैं।"
+            },
+            {
+                num: 17,
+                title: "समय और परिवर्तन का विज्ञान",
+                desc: "प्रकृति का नियम परिवर्तन और समय चक्र को समझने का दृष्टिकोण।",
+                full: "समय के साथ हर चीज बदलती है। परिवर्तन प्रकृति का नियम है और इसे समझना आवश्यक है।"
+            },
+            {
+                num: 18,
+                title: "प्रयोग और परीक्षण विधियाँ",
+                desc: "सिद्धान्तों को प्रमाणित करने के लिए प्राचीन प्रयोग और परीक्षण की पद्धतियाँ।",
+                full: "किसी भी सिद्धांत को समझने के लिए प्रयोग आवश्यक है। प्राचीन समय में भी विभिन्न प्रयोग किए जाते थे।"
+            },
+            {
+                num: 19,
+                title: "प्राकृतिक चिकित्सा सिद्धांत",
+                desc: "शरीर की स्वयं को प्राकृतिक रूप से ठीक करने की क्षमता का सिद्धांत।",
+                full: "प्राकृतिक चिकित्सा शरीर की स्वयं को ठीक करने की क्षमता पर आधारित है।"
+            },
+            {
+                num: 20,
+                title: "शरीर-मन संबंध",
+                desc: "मानसिक अवस्था का शारीरिक स्वास्थ्य और ऊर्जा पर पड़ने वाला प्रभाव।",
+                full: "शरीर और मन एक-दूसरे से जुड़े होते हैं। मानसिक स्थिति का प्रभाव शारीरिक स्वास्थ्य पर पड़ता है।"
+            },
+            {
+                num: 21,
+                title: "आहार और जीवनशैली",
+                desc: "उत्तम स्वास्थ्य के लिए सही आहार, दिनचर्या और प्राकृतिक जीवनशैली।",
+                full: "स्वस्थ आहार और सही जीवनशैली अच्छे स्वास्थ्य के लिए आवश्यक है।"
+            },
+            {
+                num: 22,
+                title: "अनुशासन और साधना",
+                desc: "लक्ष्य प्राप्ति और आत्म-विकास के लिए नियमित अभ्यास और अनुशासन का महत्व।",
+                full: "नियमित अभ्यास और अनुशासन सफलता के लिए आवश्यक हैं।"
+            },
+            {
+                num: 23,
+                title: "ज्ञान और विवेक",
+                desc: "अर्जित ज्ञान का जीवन में सही, नैतिक और कल्याणकारी उपयोग।",
+                full: "ज्ञान प्राप्त करना महत्वपूर्ण है, लेकिन उसका सही उपयोग करना और भी महत्वपूर्ण है।"
+            },
+            {
+                num: 24,
+                title: "आत्म-विकास के सिद्धांत",
+                desc: "निरंतर सीखते रहने और स्वयं को प्रतिदिन बेहतर बनाने की रणनीतियाँ।",
+                full: "व्यक्ति को निरंतर सीखते रहना चाहिए और स्वयं को बेहतर बनाने का प्रयास करना चाहिए।"
+            },
+            {
+                num: 25,
+                title: "समापन और जीवन में उपयोग",
+                desc: "सभी 25 अध्यायों के सार को व्यावहारिक जीवन में लागू करने की विधि।",
+                full: "इस अध्याय में सभी अवधारणाओं को एक साथ जोड़कर जीवन में लागू करने की बात की जाती है।"
+            }
+        ];
+
+        window.onload = function() {
+            if (localStorage.getItem('saved_user_notes')) {
+                document.getElementById('userNotes').value = localStorage.getItem('saved_user_notes');
+            }
+            if (localStorage.getItem('prof_name')) {
+                document.getElementById('profName').value = localStorage.getItem('prof_name');
+            }
+            if (localStorage.getItem('prof_phone')) {
+                document.getElementById('profPhone').value = localStorage.getItem('prof_phone');
+            }
+            if (localStorage.getItem('prof_email')) {
+                document.getElementById('profEmail').value = localStorage.getItem('prof_email');
+            }
+
+            var grid = document.getElementById('chaptersGrid');
+            if (grid) {
+                chaptersData.forEach(function(ch) {
+                    var card = document.createElement('div');
+                    card.className = 'chapter-card';
+                    card.innerHTML = '<span class="chapter-num">अध्याय ' + ch.num + '</span>' +
+                                     '<div class="chapter-title">' + ch.title + '</div>' +
+                                     '<div class="chapter-desc">' + ch.desc + '</div>' +
+                                     '<button class="btn-action" onclick="openChapter(' + ch.num + ')">पढ़ें →</button>';
+                    grid.appendChild(card);
+                });
+            }
+        };
+
+        function openChapter(num) {
+            var ch = chaptersData.find(function(c) { return c.num === num; });
+            if (ch) {
+                document.getElementById('modalTitle').innerText = "अध्याय " + ch.num + ": " + ch.title;
+                document.getElementById('modalContent').innerText = ch.full;
+                document.getElementById('chapterModal').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
